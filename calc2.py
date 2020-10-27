@@ -2,7 +2,7 @@ from functionality import users_input_number, users_input_operation, calculation
 
 count = 0
 
-user_count = int(input('How much number you want to canculate? max(1-3): '))
+user_count = float(input('How much number you want to canculate? max(1-3): '))
 
 if user_count == 1:
     first_num = users_input_number()

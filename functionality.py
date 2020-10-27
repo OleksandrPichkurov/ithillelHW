@@ -1,5 +1,5 @@
 def users_input_number():
-    number = int(input('Enter number: '))
+    number = float(input('Enter number: '))
     return number
 
 def users_input_operation(): 
