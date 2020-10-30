@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 STATUS_CHOICES = [
@@ -14,7 +15,8 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='Withdrawn')
-
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
