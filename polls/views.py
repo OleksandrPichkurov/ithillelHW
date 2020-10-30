@@ -1,7 +1,11 @@
 
 from django.http import HttpResponse
+from django.http import Http404
+from polls.models import Question, Choice
 
-from .models import Question
+from rest_framework import generics
+from polls.serializers import QuestionSerializer
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -10,15 +14,14 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+class QuestionList(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     
+    serializer_class = QuestionSerializer
+
+    def get_object(self):
+        return get_object_or_404(Question, pk=self.kwargs.get('question_id'))
