@@ -3,10 +3,6 @@ from .models import Question, Choice
 # Register your models here.
 
 
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 1
-
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['question_text']}),
@@ -27,4 +23,4 @@ class QuestionAdmin(admin.ModelAdmin):
 
     
 admin.site.register(Question, QuestionAdmin)
-
+admin.site.register(Choice)
