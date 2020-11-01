@@ -10,7 +10,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ('Do you want to publish', {'fields': ['status']}),
         ('Author',               {'fields': ['author']}),
     ]
-    inlines = [ChoiceInline]
+
     list_display = ('question_text', 'pub_date','author','was_published_recently','status')
     list_filter = ['pub_date']
     search_fields = ['question_text']
@@ -18,6 +18,7 @@ class QuestionAdmin(admin.ModelAdmin):
     
     def make_published(self, request, queryset):
         queryset.update(status='p')
+
     make_published.short_description = "Mark selected stories as published"
     actions = 'make_published'
 

@@ -35,7 +35,7 @@ class ChoiceList(generics.ListCreateAPIView):
     serializer_class = ChoiceSerializer
 
 
-class ChoiceDetail(APIView):
+class ChoiceDetail(generics.RetrieveUpdateDestroyAPIView):
     
     serializer_class = ChoiceSerializer
 
